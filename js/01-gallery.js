@@ -1,6 +1,4 @@
-import { galleryItems } from './gallery-items.js';
-// Change code below this line
-
+import { galleryItems } from "./gallery-items.js";
 
 function createGallaryItem(array) {
     return array
