@@ -26,15 +26,30 @@ galleryRef.insertAdjacentHTML("beforeend", galleryItemsMarcup);
 galleryRef.addEventListener("click", (event) => {
     event.preventDefault();
 
-    const currentImageRef = event.target.dataset.source;
-
+    const imageOriginalRef = event.target;
+    console.log(imageOriginalRef.alt);
     const instance = basicLightbox.create(
         `
-    <div class="modal">
-        <img src=${currentImageRef}>
-    </div>
-`
+        <img
+        src = ${imageOriginalRef.dataset.source}
+        alt = ${imageOriginalRef.alt}
+        >
+`,
+        {
+            onShow: () => {
+                document.addEventListener("keydown", onEscBtnClose);
+            },
+            onClose: () => {
+                document.removeEventListener("keydown", onEscBtnClose);
+            },
+        }
     );
+
+    function onEscBtnClose(evt) {
+        if (evt.code === "Escape" && instance.visible()) {
+            instance.close();
+        }
+    }
 
     instance.show();
 });
