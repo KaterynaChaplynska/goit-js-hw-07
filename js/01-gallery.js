@@ -25,6 +25,9 @@ galleryRef.insertAdjacentHTML("beforeend", galleryItemsMarcup);
 
 galleryRef.addEventListener("click", (event) => {
     event.preventDefault();
+    if (event.target.nodeName !== "IMG") {
+        return;
+    }
 
     const imageOriginalRef = event.target;
     console.log(imageOriginalRef.alt);
